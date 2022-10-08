@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { Card, Col, Row, Input, Button, Empty } from "@douyinfe/semi-ui";
 import "./App.css";
 import { load, type ReSpace } from "./space";
@@ -11,37 +11,48 @@ const chunk = (arr: Array<ReSpace>, size: number): Array<Array<ReSpace>> => {
   return ret;
 };
 
-function App() {
+const useSpaces = () => {
   const [spaces, setSpaces] = useState<Array<ReSpace>>([]);
-  const [editing, setEditing] = useState<string>();
 
-  async function init() {
-    const spaces = await load();
-    setSpaces(spaces);
+  const loadAndSet = () => load()
+    .then(setSpaces)
+    .catch(console.log.bind(console, "space load error"))
+
+  const loadedFlag = useRef<Promise<void> | undefined>(undefined)
+  if (!loadedFlag.current) {
+     loadedFlag.current = loadAndSet()
   }
 
-  const save = async (ele: ReSpace) => {
-    await fetch(`api/space/${ele._id}`, {
+  const modify = (id: string) => {
+    return (over: (it: ReSpace) => ReSpace) => setSpaces(
+      (prev) => prev.map(it => it._id === id ? over(it) : it)
+    )
+  }
+
+  const saveNewSpace = (ele: ReSpace) => {
+    fetch(`api/space/${ele._id}`, {
       method: "put",
       body: JSON.stringify(ele),
-    });
-    await init();
-  };
+    })
+      .then(loadAndSet, console.log.bind(console, "save space error"))
+  }
+
+  const _postNewSpace = (_ele: Partial<ReSpace>) => {
+    throw new Error('does not implement')
+  }
+
+  return { spaces, setSpaces, modify, saveNewSpace }
+}
+
+function App() {
+  const { spaces, modify: modifySpace, saveNewSpace: save } = useSpaces();
+  const [editing, setEditing] = useState<string>();
 
   const handleChange = (id: string) => (eventValue: string) => {
-    setSpaces(
-      spaces.map((space) => {
-        if (space._id === id) {
-          return { ...space, physicsPath: eventValue };
-        }
-        return space;
-      })
-    );
+    modifySpace(id)(
+      it => ({ ...it, physicsPath: eventValue })
+    )
   };
-
-  useEffect(() => {
-    init();
-  }, []);
 
   return (
     <div className="App">
