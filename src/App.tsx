@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Card, Col, Row, Input, Button, Empty, Toast } from "@douyinfe/semi-ui";
 import "./App.css";
 import { load, type SpaceVo } from "./space";
+import { Link } from "react-router-dom";
+
 
 const chunk = (arr: Array<SpaceVo>, size: number): Array<Array<SpaceVo>> => {
   const ret = [];
@@ -177,7 +179,9 @@ function App() {
                       ></Input>
                       <Row gutter={[8, 8]} style={{ marginTop: 16 }}>
                         <Col span={12}>
-                          <Button>view</Button>
+                            <Link to={`space/${ele.id}`}>
+                              <Button>view</Button>
+                            </Link>
                         </Col>
                         {editingId === ele.id && (
                           <Col span={12}>
