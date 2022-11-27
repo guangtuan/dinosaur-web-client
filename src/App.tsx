@@ -1,17 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Col, Row, Input, Button, Empty, Toast } from "@douyinfe/semi-ui";
 import "./App.css";
 import { load, type SpaceVo } from "./space";
 import { Link } from "react-router-dom";
-
-
-const chunk = (arr: Array<SpaceVo>, size: number): Array<Array<SpaceVo>> => {
-  const ret = [];
-  for (let i = 0; i < arr.length; i = i + size) {
-    ret.push([...arr.slice(i, i + size)]);
-  }
-  return ret;
-};
+import useRunOnce from "./lang/useRunOnce";
+import chunk from "./lang/chunk";
 
 const filterMapWhenResponseOk = (res: Response) => {
   if (res.ok) {
@@ -24,22 +17,6 @@ const filterMapWhenResponseOk = (res: Response) => {
 const noop = (): void => {};
 const constTrue = () => true;
 const constFalse = () => false;
-
-const useRunOnce = <T extends (...a: any[]) => void>(fn: T) => {
-  // 当前版本 trick 用闭包保持fn的值
-  const fnRef = useRef(fn);
-  fnRef.current = fn;
-
-  return useMemo(() => {
-    let shouldRun = true;
-    return (...args: Parameters<T>): void => {
-      if (shouldRun) {
-        shouldRun = false;
-        fnRef.current(...args);
-      }
-    };
-  }, []);
-};
 
 /**
  * 获得已经定义好的 space 的状态
