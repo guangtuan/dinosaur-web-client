@@ -13,11 +13,11 @@ import "./index.css";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App/>,
+        element: <App />,
     },
     {
         path: "/space/:spaceId",
-        element: <SpaceDetail/>,
+        element: <SpaceDetail />,
     },
 ]);
 

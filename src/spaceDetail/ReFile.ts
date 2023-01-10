@@ -1,34 +1,15 @@
-interface OsFile {
+export interface OsFile {
     name: string,
     fullpath: string
 }
 
-export class ReFile {
-    tag: string = "file"
-
-    osFile: OsFile
-    
-    parent: ReFolder
-
-    constructor(
-        osFile : OsFile,
-        parent: ReFolder,
-    ) {
-        this.osFile = osFile
-        this.parent = parent
-    }
-}
-
-export class ReFolder {
-    tag: string = "folder"
+export type ReFile = {
+    tag: "file" | "folder"
 
     osFile: OsFile
 
-    constructor(osFile: OsFile) {
-        this.osFile = osFile
-    }
+    parent: ReFile | null
 }
 
-export OsFile
 
-export type ReResource = ReFile | ReFolder 
+export type ReResource = ReFile 
