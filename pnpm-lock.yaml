@@ -1,4 +1,4 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@douyinfe/semi-icons': 2.27.0
@@ -15,10 +15,10 @@ specifiers:
 
 dependencies:
   '@douyinfe/semi-icons': registry.npmmirror.com/@douyinfe/semi-icons/2.27.0_react@18.2.0
-  '@douyinfe/semi-ui': registry.npmmirror.com/@douyinfe/semi-ui/2.20.3_react-dom@18.2.0+react@18.2.0
+  '@douyinfe/semi-ui': registry.npmmirror.com/@douyinfe/semi-ui/2.20.3_biqbaboplfbrettd7655fr4n2y
   react: registry.npmmirror.com/react/18.2.0
   react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
-  react-router-dom: registry.npmmirror.com/react-router-dom/6.4.3_react-dom@18.2.0+react@18.2.0
+  react-router-dom: registry.npmmirror.com/react-router-dom/6.4.3_biqbaboplfbrettd7655fr4n2y
 
 devDependencies:
   '@types/react': registry.npmmirror.com/@types/react/18.0.17
@@ -252,6 +252,8 @@ packages:
     version: 7.19.3
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dependencies:
+      '@babel/types': registry.npmmirror.com/@babel/types/7.19.3
     dev: true
 
   registry.npmmirror.com/@babel/plugin-syntax-jsx/7.18.6_@babel+core@7.19.3:
@@ -468,7 +470,7 @@ packages:
       glob: registry.npmmirror.com/glob/7.2.3
     dev: false
 
-  registry.npmmirror.com/@douyinfe/semi-ui/2.20.3_react-dom@18.2.0+react@18.2.0:
+  registry.npmmirror.com/@douyinfe/semi-ui/2.20.3_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-0YJvwsqtIq8ow5+O3pVoVmcWRVv6RMSyw1kUNqSbKHM0Y5nJCN+1Z3x1k8HXlwvJ9wC2Hch3DfECiAGOZJYrLA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@douyinfe/semi-ui/-/semi-ui-2.20.3.tgz}
     id: registry.npmmirror.com/@douyinfe/semi-ui/2.20.3
     name: '@douyinfe/semi-ui'
@@ -492,9 +494,9 @@ packages:
       prop-types: registry.npmmirror.com/prop-types/15.8.1
       react: registry.npmmirror.com/react/18.2.0
       react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
-      react-resizable: registry.npmmirror.com/react-resizable/1.11.1_react-dom@18.2.0+react@18.2.0
-      react-sortable-hoc: registry.npmmirror.com/react-sortable-hoc/2.0.0_react-dom@18.2.0+react@18.2.0
-      react-window: registry.npmmirror.com/react-window/1.8.7_react-dom@18.2.0+react@18.2.0
+      react-resizable: registry.npmmirror.com/react-resizable/1.11.1_biqbaboplfbrettd7655fr4n2y
+      react-sortable-hoc: registry.npmmirror.com/react-sortable-hoc/2.0.0_biqbaboplfbrettd7655fr4n2y
+      react-window: registry.npmmirror.com/react-window/1.8.7_biqbaboplfbrettd7655fr4n2y
       resize-observer-polyfill: registry.npmmirror.com/resize-observer-polyfill/1.5.1
       scroll-into-view-if-needed: registry.npmmirror.com/scroll-into-view-if-needed/2.2.29
       utility-types: registry.npmmirror.com/utility-types/3.10.0
@@ -1328,7 +1330,7 @@ packages:
       scheduler: registry.npmmirror.com/scheduler/0.23.0
     dev: false
 
-  registry.npmmirror.com/react-draggable/4.4.5_react-dom@18.2.0+react@18.2.0:
+  registry.npmmirror.com/react-draggable/4.4.5_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-OMHzJdyJbYTZo4uQE393fHcqqPYsEtkjfMgvCHr6rejT+Ezn4OZbNyGH50vv+SunC1RMvwOTSWkEODQLzw1M9g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-draggable/-/react-draggable-4.4.5.tgz}
     id: registry.npmmirror.com/react-draggable/4.4.5
     name: react-draggable
@@ -1356,7 +1358,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  registry.npmmirror.com/react-resizable/1.11.1_react-dom@18.2.0+react@18.2.0:
+  registry.npmmirror.com/react-resizable/1.11.1_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-S70gbLaAYqjuAd49utRHibtHLrHXInh7GuOR+6OO6RO6uleQfuBnWmZjRABfqNEx3C3Z6VPLg0/0uOYFrkfu9Q==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-resizable/-/react-resizable-1.11.1.tgz}
     id: registry.npmmirror.com/react-resizable/1.11.1
     name: react-resizable
@@ -1368,10 +1370,10 @@ packages:
       prop-types: registry.npmmirror.com/prop-types/15.8.1
       react: registry.npmmirror.com/react/18.2.0
       react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
-      react-draggable: registry.npmmirror.com/react-draggable/4.4.5_react-dom@18.2.0+react@18.2.0
+      react-draggable: registry.npmmirror.com/react-draggable/4.4.5_biqbaboplfbrettd7655fr4n2y
     dev: false
 
-  registry.npmmirror.com/react-router-dom/6.4.3_react-dom@18.2.0+react@18.2.0:
+  registry.npmmirror.com/react-router-dom/6.4.3_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-MiaYQU8CwVCaOfJdYvt84KQNjT78VF0TJrA17SIQgNHRvLnXDJO6qsFqq8F/zzB1BWZjCFIrQpu4QxcshitziQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-router-dom/-/react-router-dom-6.4.3.tgz}
     id: registry.npmmirror.com/react-router-dom/6.4.3
     name: react-router-dom
@@ -1400,7 +1402,7 @@ packages:
       react: registry.npmmirror.com/react/18.2.0
     dev: false
 
-  registry.npmmirror.com/react-sortable-hoc/2.0.0_react-dom@18.2.0+react@18.2.0:
+  registry.npmmirror.com/react-sortable-hoc/2.0.0_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-JZUw7hBsAHXK7PTyErJyI7SopSBFRcFHDjWW5SWjcugY0i6iH7f+eJkY8cJmGMlZ1C9xz1J3Vjz0plFpavVeRg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-sortable-hoc/-/react-sortable-hoc-2.0.0.tgz}
     id: registry.npmmirror.com/react-sortable-hoc/2.0.0
     name: react-sortable-hoc
@@ -1416,7 +1418,7 @@ packages:
       react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
     dev: false
 
-  registry.npmmirror.com/react-window/1.8.7_react-dom@18.2.0+react@18.2.0:
+  registry.npmmirror.com/react-window/1.8.7_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-JHEZbPXBpKMmoNO1bNhoXOOLg/ujhL/BU4IqVU9r8eQPcy5KQnGHIHDRkJ0ns9IM5+Aq5LNwt3j8t3tIrePQzA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/react-window/-/react-window-1.8.7.tgz}
     id: registry.npmmirror.com/react-window/1.8.7
     name: react-window
