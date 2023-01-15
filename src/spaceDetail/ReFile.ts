@@ -1,15 +1,21 @@
-export interface OsFile {
-    name: string,
-    fullpath: string
-}
+export type OsFile = {
+  name: string;
+  fullpath: string;
+};
 
 export type ReFile = {
-    tag: "file" | "folder"
+  tag: "file";
 
-    osFile: OsFile
+  osFile: OsFile;
+};
 
-    parent: ReFile | null
-}
+export type ReFolder = {
+  tag: "folder";
 
+  osFile: OsFile;
+};
 
-export type ReResource = ReFile 
+export type ReResource = {
+  on: string;
+  children: Array<ReFolder | ReFile>;
+};

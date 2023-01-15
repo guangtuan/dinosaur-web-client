@@ -156,9 +156,9 @@ function App() {
                       ></Input>
                       <Row gutter={[8, 8]} style={{ marginTop: 16 }}>
                         <Col span={12}>
-                            <Link to={`space/${ele.id}`}>
-                              <Button>view</Button>
-                            </Link>
+                          <Link to={`space/${ele.id}?on=${ele.physicsPath}`}>
+                            <Button>view</Button>
+                          </Link>
                         </Col>
                         {editingId === ele.id && (
                           <Col span={12}>
