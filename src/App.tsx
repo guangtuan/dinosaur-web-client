@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Row, Input, Button, Empty, Toast } from "@douyinfe/semi-ui";
 import "./App.css";
-import { load, type SpaceVo } from "./space";
+import { type SpaceVo } from "./space";
 import { Link } from "react-router-dom";
 import useRunOnce from "./lang/useRunOnce";
 import chunk from "./lang/chunk";
