@@ -5,6 +5,7 @@ import { load, type SpaceVo } from "./space";
 import { Link } from "react-router-dom";
 import useRunOnce from "./lang/useRunOnce";
 import chunk from "./lang/chunk";
+import { get } from "./lang/api";
 
 const filterMapWhenResponseOk = (res: Response) => {
   if (res.ok) {
@@ -24,8 +25,14 @@ const constFalse = () => false;
 const useSpaces = () => {
   const [spaces, setSpaces] = useState<Array<SpaceVo>>([]);
 
-  const getLastedSpaces = () => {
-    return load().then(setSpaces);
+  const getLastedSpaces = async () => {
+    const result = (await get({
+      url: {
+        base: "/api/space",
+        params: {},
+      },
+    })) as Array<SpaceVo>;
+    setSpaces(result || []);
   };
 
   const runWhenMount = useRunOnce(() => getLastedSpaces());

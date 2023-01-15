@@ -36,15 +36,21 @@ export const post = <T extends any>(
   });
 };
 
-export const get = <T extends any>(
+export const get = async <T extends any>(
   getContext: GetContext
 ): Promise<T | null> => {
-  return fetch(urlize(getContext.url), {
-    method: "get",
-    headers: {
-      "content-type": "application/json",
-    },
-  }).then((resp) => {
+  try {
+    const resp = await fetch(urlize(getContext.url), {
+      method: "get",
+      headers: {
+        "content-type": "application/json",
+      },
+    });
     return filterMapWhenResponseOk(resp);
-  });
+  } catch (e) {
+    Notification.open({
+      content: `接口响应失败 ${e}`,
+    });
+    return null;
+  }
 };
