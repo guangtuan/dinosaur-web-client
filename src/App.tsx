@@ -5,19 +5,7 @@ import { type SpaceVo } from "./space";
 import { Link } from "react-router-dom";
 import useRunOnce from "./lang/useRunOnce";
 import chunk from "./lang/chunk";
-import { get } from "./lang/api";
-
-const filterMapWhenResponseOk = (res: Response) => {
-  if (res.ok) {
-    return res.json();
-  } else {
-    return Promise.reject(new Error("接口响应失败"));
-  }
-};
-
-const noop = (): void => {};
-const constTrue = () => true;
-const constFalse = () => false;
+import { get, post, put } from "./lang/api";
 
 /**
  * 获得已经定义好的 space 的状态
@@ -46,17 +34,14 @@ const useSpaces = () => {
       setSpaces((it) => it.map((it) => (it.id === id ? fn(it) : it)));
     };
 
-  const updateToServer = (data: SpaceVo) => {
-    return fetch(`api/space/${data.id}`, {
-      method: "put",
-      body: JSON.stringify(data),
-      headers: {
-        "content-type": "application/json",
+  const updateToServer = async (data: SpaceVo) => {
+    await put({
+      url: {
+        base: `api/space/${data.id}`,
       },
-    })
-      .then(filterMapWhenResponseOk)
-      .then(getLastedSpaces)
-      .then(constTrue, constFalse);
+      body: data,
+    });
+    await getLastedSpaces();
   };
 
   return {
@@ -86,17 +71,14 @@ const useCreatingSpace = () => {
 
   const startCreating = () => setPack(empty);
 
-  const postToServer = () => {
-    return fetch(`api/space`, {
-      method: "post",
-      body: JSON.stringify(pack),
-      headers: {
-        "content-type": "application/json",
+  const postToServer = async () => {
+    await post({
+      url: {
+        base: `/api/space`,
       },
-    })
-      .then(filterMapWhenResponseOk)
-      .then(() => setPack({ name: "", physicsPath: "" }))
-      .then(constTrue, constFalse);
+      body: pack,
+    });
+    setPack({ name: "", physicsPath: "" });
   };
 
   return { startCreating, pack, setPack, postToServer };
@@ -114,20 +96,14 @@ function App() {
 
   const { startCreating, pack, setPack, postToServer } = useCreatingSpace();
 
-  const doUpdate = (e: SpaceVo) => {
-    updateToServer(e).then((ok) =>
-      (ok ? noop : Toast.error.bind(Toast))("更新失败")
-    );
+  const doUpdate = async (e: SpaceVo) => {
+    await updateToServer(e);
+    await getLastedSpaces();
   };
 
-  const doCreate = () => {
-    postToServer().then((ok) =>
-      (ok
-        ? getLastedSpaces
-        : (msg: string) => {
-            Toast.error(msg);
-          })("创建失败")
-    );
+  const doCreate = async () => {
+    await postToServer();
+    await getLastedSpaces();
   };
 
   const modifyPhysicsPathOfExistSpace =
