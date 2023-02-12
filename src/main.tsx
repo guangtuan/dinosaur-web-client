@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/space/:spaceId",
+    path: "/spaceDetail",
     element: <SpaceDetail />,
   },
 ]);

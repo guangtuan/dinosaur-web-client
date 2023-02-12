@@ -1,19 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ReFile, ReResource, ReFolder, OsFile } from "./ReFile";
-import {
-  RadioGroup,
-  Radio,
-  Space,
-  Button,
-  Table
-} from "@douyinfe/semi-ui";
+import { RadioGroup, Radio, Space, Button, Table } from "@douyinfe/semi-ui";
 import {
   IconMusic,
   IconImage,
   IconAlarm,
   IconFolder,
-  IconPlayCircle
+  IconPlayCircle,
 } from "@douyinfe/semi-icons";
 import { useSearchParams } from "react-router-dom";
 import { get } from "../lang/api";
@@ -26,7 +20,7 @@ const getFileIcon = (suffix: string) => {
     case "ts":
     case "mp4":
     case "rmvb":
-      return <IconPlayCircle style={{ color: "#673AB7" }} />
+      return <IconPlayCircle style={{ color: "#673AB7" }} />;
     case "mp3":
       return <IconMusic style={{ color: "#6A3AC7" }} />;
     case "jpg":
@@ -44,6 +38,7 @@ const useResource = () => {
   const [resource, setResource] = useState<ReResource>();
   const [searchParams, setSearchParams] = useSearchParams();
   const [on, setOn] = useState<string>(searchParams.get("on") || "");
+  const [space, setSpace] = useState<string>(searchParams.get("space") || "");
 
   const loadResources = async (on: string) => {
     const result = (await get({
@@ -51,6 +46,7 @@ const useResource = () => {
         base: API_RESOURCE_PREFIX,
         params: {
           on,
+          space,
         },
       },
     })) as ReResource;
@@ -59,7 +55,7 @@ const useResource = () => {
 
   const runWhenMount = useRunOnce(() => loadResources(on));
 
-  useEffect(() => runWhenMount(), /* run once */[]);
+  useEffect(() => runWhenMount(), /* run once */ []);
 
   return {
     on,
@@ -70,10 +66,10 @@ const useResource = () => {
 };
 
 type RenderAbleItem = {
-  type: 'file' | 'folder',
-  name: string,
-  suffix: string,
-}
+  type: "file" | "folder";
+  name: string;
+  suffix: string;
+};
 
 const convert = (
   f: ReFile | ReFolder,
@@ -85,75 +81,63 @@ const convert = (
   return {
     type: f.tag,
     name: f.osFile.name,
-    suffix: suffix || ''
-  }
-}
+    suffix: suffix || "",
+  };
+};
 
 const columns = [
   {
-    title: '文件',
+    title: "文件",
     render: (text: string, record: RenderAbleItem, index: number) => {
-      if (record.type === 'folder') {
+      if (record.type === "folder") {
         return (
           <Space>
             <IconFolder style={{ color: "#CDDC39" }} />
             <span style={{ paddingLeft: "8px" }}>{record.name}</span>
           </Space>
-        )
+        );
       } else {
         return (
           <Space>
             {getFileIcon(record.suffix)}
             <span style={{ paddingLeft: "8px" }}>{record.name}</span>
           </Space>
-        )
+        );
       }
     },
   },
   {
-    title: '标记为',
+    title: "标记为",
     render: (text: string, record: RenderAbleItem, index: number) => {
-      if (record.type === 'folder') {
-        return (
-          <Space>
-
-          </Space>
-        )
+      if (record.type === "folder") {
+        return <Space></Space>;
       } else {
         return (
-          <RadioGroup
-            type='button'
-            buttonSize='small'
-            defaultValue={1}
-          >
+          <RadioGroup type="button" buttonSize="small" defaultValue={1}>
             <Radio value={1}>剧集</Radio>
             <Radio value={2}>电影</Radio>
             <Radio value={3}>图片</Radio>
             <Radio value={4}>音乐</Radio>
           </RadioGroup>
-        )
+        );
       }
     },
   },
   {
-    title: '操作',
+    title: "操作",
     render: (text: string, record: RenderAbleItem, index: number) => {
-      if (record.type === 'folder') {
-        return (
-          <Space>
-
-          </Space>
-        )
+      if (record.type === "folder") {
+        return <Space></Space>;
       } else {
         return (
           <Space>
             <Button type="secondary">播放</Button>
           </Space>
-        )
+        );
       }
     },
-  }
-]
+  },
+];
 
 /**
  * url: space/63c249e21a2c97e086b4bdda?on=C:%5CUsers%5Cgrant%5CPictures
@@ -162,9 +146,7 @@ const columns = [
  * 拿这个 on 去发请求，列出 on 下边的数据
  */
 const SpaceDetail = () => {
-  let { spaceId } = useParams<"spaceId">();
   let { resource } = useResource();
-  console.log(spaceId);
 
   return (
     <div>
