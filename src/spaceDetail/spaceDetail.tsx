@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
-import { ReFile, ReResource, ReFolder, OsFile } from "./ReFile";
+import { useEffect, useState } from "react";
+import { ReFile, ReResource, ReFolder } from "./ReFile";
 import { RadioGroup, Radio, Space, Button, Table } from "@douyinfe/semi-ui";
 import {
   IconMusic,
@@ -65,11 +64,20 @@ const useResource = () => {
   };
 };
 
-type RenderAbleItem = {
-  type: "file" | "folder";
+type RenderAbleFile = {
+  type: "file";
   name: string;
   suffix: string;
+
+  remote: string;
 };
+
+type RenderAbleFoleder = {
+  type: "folder";
+  name: string;
+};
+
+type RenderAbleItem = RenderAbleFile | RenderAbleFoleder;
 
 const convert = (
   f: ReFile | ReFolder,
@@ -78,11 +86,19 @@ const convert = (
 ): RenderAbleItem => {
   const [_, suffix] = f.osFile.name.split(".");
 
-  return {
-    type: f.tag,
-    name: f.osFile.name,
-    suffix: suffix || "",
-  };
+  if (f.tag === "file") {
+    return {
+      type: f.tag,
+      name: f.osFile.name,
+      suffix: suffix,
+      remote: f.remote,
+    };
+  } else {
+    return {
+      type: f.tag,
+      name: f.osFile.name,
+    };
+  }
 };
 
 const columns = [
@@ -131,7 +147,14 @@ const columns = [
       } else {
         return (
           <Space>
-            <Button type="secondary">播放</Button>
+            <Button
+              type="secondary"
+              onClick={() => {
+                window.open("potplayer://" + record.remote);
+              }}
+            >
+              使用 potPlayer 播放
+            </Button>
           </Space>
         );
       }
