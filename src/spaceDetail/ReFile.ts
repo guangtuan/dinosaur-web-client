@@ -1,4 +1,11 @@
+export type FileSize = {
+  origin: number;
+
+  readable: string;
+};
+
 export type OsFile = {
+  size: FileSize;
   name: string;
   fullpath: string;
 };

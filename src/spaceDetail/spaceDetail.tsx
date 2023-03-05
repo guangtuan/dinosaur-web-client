@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { ReFile, ReResource, ReFolder } from "./ReFile";
-import { RadioGroup, Radio, Space, Button, Table } from "@douyinfe/semi-ui";
+import { ReFile, ReFolder, ReResource } from "./ReFile";
+import { Button, Radio, RadioGroup, Space, Table } from "@douyinfe/semi-ui";
 import {
-  IconMusic,
-  IconImage,
   IconAlarm,
   IconFolder,
+  IconImage,
+  IconMusic,
   IconPlayCircle,
+  IconText,
 } from "@douyinfe/semi-icons";
 import { useSearchParams } from "react-router-dom";
 import { get } from "../lang/api";
 import useRunOnce from "../lang/useRunOnce";
+import { RenderAbleItem } from "./renderAbleFile";
+import last from "../lang/array";
 
 const API_RESOURCE_PREFIX = "/api/resources/";
 
@@ -19,6 +22,7 @@ const getFileIcon = (suffix: string) => {
     case "ts":
     case "mp4":
     case "rmvb":
+    case "mkv":
       return <IconPlayCircle style={{ color: "#673AB7" }} />;
     case "mp3":
       return <IconMusic style={{ color: "#6A3AC7" }} />;
@@ -28,6 +32,8 @@ const getFileIcon = (suffix: string) => {
     case "webp":
     case "bmp":
       return <IconImage style={{ color: "#9C27B0" }} />;
+    case "ass":
+      return <IconText></IconText>;
     default:
       return <IconAlarm></IconAlarm>;
   }
@@ -64,27 +70,12 @@ const useResource = () => {
   };
 };
 
-type RenderAbleFile = {
-  type: "file";
-  name: string;
-  suffix: string;
-
-  remote: string;
-};
-
-type RenderAbleFoleder = {
-  type: "folder";
-  name: string;
-};
-
-type RenderAbleItem = RenderAbleFile | RenderAbleFoleder;
-
 const convert = (
   f: ReFile | ReFolder,
   index: number,
   arr: Array<ReFile | ReFolder>
 ): RenderAbleItem => {
-  const [_, suffix] = f.osFile.name.split(".");
+  const suffix = last(f.osFile.name.split("."));
 
   if (f.tag === "file") {
     return {
@@ -92,6 +83,7 @@ const convert = (
       name: f.osFile.name,
       suffix: suffix,
       remote: f.remote,
+      size: f.osFile.size.readable,
     };
   } else {
     return {
