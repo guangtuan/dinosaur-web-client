@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Row, Input, Button, Empty, Toast } from "@douyinfe/semi-ui";
 import "./spaceEntry.css";
-import { type SpaceVo } from "../space";
+import { SpaceCreation, type SpaceVo } from "./space";
 import { Link } from "react-router-dom";
 import useRunOnce from "../lang/useRunOnce";
 import chunk from "../lang/chunk";
@@ -55,16 +55,11 @@ const useSpaces = () => {
 };
 
 /**
- * 创建 Space 所包含信息类型
- */
-type Pack = Pick<SpaceVo, "name" | "physicsPath">;
-
-/**
  * 创建新 space
  */
 const useCreatingSpace = () => {
-  const empty: Pack = { name: "", physicsPath: "" };
-  const [pack, setPack] = useState<Pack>({
+  const empty: SpaceCreation = { name: "", physicsPath: "" };
+  const [pack, setPack] = useState<SpaceCreation>({
     name: "",
     physicsPath: "",
   });
