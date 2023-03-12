@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Row, Input, Button, Empty, Toast } from "@douyinfe/semi-ui";
-import "./App.css";
-import { type SpaceVo } from "./space";
+import "./spaceEntry.css";
+import { type SpaceVo } from "../space";
 import { Link } from "react-router-dom";
-import useRunOnce from "./lang/useRunOnce";
-import chunk from "./lang/chunk";
-import { get, post, put } from "./lang/api";
+import useRunOnce from "../lang/useRunOnce";
+import chunk from "../lang/chunk";
+import { get, post, put } from "../lang/api";
 
 /**
  * 获得已经定义好的 space 的状态
@@ -84,7 +84,7 @@ const useCreatingSpace = () => {
   return { startCreating, pack, setPack, postToServer };
 };
 
-function App() {
+function SpaceEntry() {
   const {
     spaces,
     getLastedSpaces,
@@ -203,4 +203,4 @@ function App() {
   );
 }
 
-export default App;
+export default SpaceEntry;

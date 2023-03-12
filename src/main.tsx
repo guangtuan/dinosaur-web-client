@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import App from "./App";
+import SpaceEntry from "./space/spaceEntry";
 import SpaceDetail from "./spaceDetail/spaceDetail";
 
 import "./index.css";
@@ -10,7 +10,7 @@ import "./index.css";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <SpaceEntry />,
   },
   {
     path: "/spaceDetail",
