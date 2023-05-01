@@ -135,7 +135,7 @@ function SpaceEntry() {
                       <Row gutter={[8, 8]} style={{ marginTop: 16 }}>
                         <Col span={12}>
                           <Link
-                            to={`spaceDetail?space=${ele.name}&on=${ele.physicsPath}`}
+                            to={`/spaceDetail?space=${ele.name}&on=${ele.physicsPath}`}
                           >
                             <Button>view</Button>
                           </Link>
