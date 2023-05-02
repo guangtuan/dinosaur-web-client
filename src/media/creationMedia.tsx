@@ -1,30 +1,38 @@
-import { Modal, Form, Input, Button, Divider } from "@douyinfe/semi-ui";
+import { Modal, Form, Input, Divider } from "@douyinfe/semi-ui";
 import { Pack } from "./model";
 import { assoc } from "ramda";
-import { Dispatch } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { Rating } from "@douyinfe/semi-ui";
 import { IconStar } from "@douyinfe/semi-icons";
 
 type MyProp = {
-  pack: Pack;
-  setPack: Dispatch<Pack>;
+  showCreation: boolean;
+  setShowCreation: Dispatch<SetStateAction<boolean>>;
 };
 
+const st = { fontSize: 24 };
+
 const CreationMedia = (p: MyProp) => {
-  const { pack, setPack } = p;
-  const st = { fontSize: 24 };
+  const [pack, setPack] = useState<Pack>({
+    c: false,
+    name: undefined,
+    cover: undefined,
+    rating: undefined,
+  });
+  const { showCreation, setShowCreation } = p;
+  const close = () => setShowCreation(false);
   return (
     <Modal
+      closable={false}
       onOk={() => {
         console.log("save");
-        // TODO: call and create
-        setPack(assoc("c", false, pack));
+        close();
       }}
       onCancel={() => {
         console.log("cancel");
-        setPack(assoc("c", false, pack));
+        close();
       }}
-      visible={true}
+      visible={showCreation}
     >
       <Form>
         <Divider />
