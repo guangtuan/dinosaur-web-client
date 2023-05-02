@@ -2,12 +2,11 @@
 }
 
 .media-footer {
-    width: 100%;
-    padding: 8px;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
 }
 
 .create-media {
-
 }

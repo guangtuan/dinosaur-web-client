@@ -6,7 +6,7 @@ import { SubNavProps } from "@douyinfe/semi-ui/lib/es/navigation/SubNav";
 import MediaEntry from "./media/media";
 import SpaceEntry from "./space/spaceEntry";
 import SpaceDetail from "./spaceDetail/spaceDetail";
-import './app.css'
+import "./app.css";
 
 export default function App() {
   return (
