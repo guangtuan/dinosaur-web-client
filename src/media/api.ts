@@ -18,6 +18,8 @@ export type Tv = {
   no: number;
 };
 
+export type Media = WithId<Series>
+
 const createSeries = async (series: Series): Promise<WithId<Series>> => {
   const resp = (await post({
     body: series,
