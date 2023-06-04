@@ -3,7 +3,8 @@ import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Nav } from "@douyinfe/semi-ui";
 import { NavItemProps } from "@douyinfe/semi-ui/lib/es/navigation/Item";
 import { SubNavProps } from "@douyinfe/semi-ui/lib/es/navigation/SubNav";
-import SeriesEntry from "./series/series";
+import SeriesEntry from "./series";
+import MovieEntry from "./movies";
 import SpaceEntry from "./space/spaceEntry";
 import SpaceDetail from "./spaceDetail/spaceDetail";
 import "./app.css";
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route path="space" element={<SpaceEntry />} />
           <Route path="series" element={<SeriesEntry />} />
+          <Route path="movie" element={<MovieEntry />} />
           <Route path="spaceDetail/*" element={<SpaceDetail />} />
         </Route>
       </Routes>
@@ -47,8 +49,9 @@ function Layout() {
           );
         }}
         items={[
-          { itemKey: "space", text: "Space" },
+          { itemKey: "space", text: "空间" },
           { itemKey: "series", text: "剧集" },
+          { itemKey: "movie", text: "电影" },
         ]}
       ></Nav>
       <Outlet />
